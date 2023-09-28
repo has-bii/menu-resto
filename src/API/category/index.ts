@@ -10,7 +10,7 @@ categoryAPI.get("/", CategoryController.fetch)
 categoryAPI.post("/create", CategoryController.create)
 
 // Edit
-categoryAPI.post("/update", CategoryController.edit)
+categoryAPI.put("/update", CategoryController.edit)
 
 // Delete
 categoryAPI.delete("/delete/:id", CategoryController.delete)
