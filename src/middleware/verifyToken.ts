@@ -19,7 +19,10 @@ class Middleware {
             const jwtPayload: any = jwt.verify(req.cookies.user_access, env.SECRET_KEY)
 
             // Find user
-            const user = await USER.findUnique({ where: { id: jwtPayload.id } })
+            const user = await USER.findUnique({
+                where: { id: jwtPayload.id },
+                select: { id: true, name: true, email: true, role: true, isVerified: true },
+            })
 
             if (!user) {
                 res.status(401).json({ message: "Unauthorized. User has been removed!" })

@@ -25,6 +25,9 @@ model User {
   createdAt  DateTime  @default(now()) @map("created_at") @db.Timestamptz()
   updatedAt  DateTime? @map("updated_at") @db.Timestamptz()
 
+  // Relations
+  menus Menu[]
+
   @@map("users")
 }
 
@@ -35,4 +38,30 @@ model Token {
   expire DateTime @db.Timestamptz()
 
   @@map("tokens")
+}
+
+model Menu {
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(255)
+  desc       String   @db.Text
+  userId     Int      @map("user_id")
+  categoryId Int      @map("category_id")
+  createdAt  DateTime @map("created_at") @db.Timestamptz()
+  udpatedAt  DateTime @map("updated_at") @db.Timestamptz()
+
+  // Relation
+  user     User     @relation(fields: [userId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id])
+
+  @@map("menus")
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String @unique @db.VarChar(255)
+
+  // Relations
+  menus Menu[]
+
+  @@map("categories")
 }
