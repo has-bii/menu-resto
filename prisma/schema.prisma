@@ -46,6 +46,7 @@ model Menu {
   desc       String   @db.Text
   userId     Int      @map("user_id")
   categoryId Int      @map("category_id")
+  price      Float    @db.DoublePrecision
   createdAt  DateTime @map("created_at") @db.Timestamptz()
   udpatedAt  DateTime @map("updated_at") @db.Timestamptz()
 
