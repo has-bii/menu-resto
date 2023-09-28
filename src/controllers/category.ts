@@ -1,6 +1,5 @@
 import { Request, Response } from "express"
 import prisma from "../lib/prisma"
-import { Category } from "@prisma/client"
 
 interface ICategoryQuery {
     id?: string
@@ -72,6 +71,66 @@ export default class CategoryController {
             })
 
             console.error("Failed to create new category!", error)
+        }
+    }
+
+    static async edit(req: Request, res: Response) {
+        try {
+            const body: ICategoryQuery = req.body
+
+            if (!body.id || !body.name) {
+                res.status(404).json({
+                    message: "ID and Name fileds are required",
+                })
+
+                return
+            }
+
+            await prisma.category
+                .update({ where: { id: parseInt(body.id) }, data: { name: body.name } })
+                .then(() => {
+                    res.status(200).json({ message: "The category edited successfully" })
+                })
+                .catch((err) => {
+                    console.error(err)
+                    res.status(404).json({ message: "Failed to edit the category!" })
+                })
+        } catch (error) {
+            res.status(500).json({
+                message: "Failed to edit category! Unexpected error has occurred.",
+            })
+
+            console.error("Failed to edit category!", error)
+        }
+    }
+
+    static async delete(req: Request, res: Response) {
+        try {
+            const paramId: string = req.params.id
+
+            if (!paramId) {
+                res.status(404).json({
+                    message: "ID is required",
+                })
+                return
+            }
+
+            await prisma.category
+                .delete({
+                    where: { id: parseInt(paramId) },
+                })
+                .then((data) => {
+                    res.status(200).json({ message: `${data.name} category has been deleted` })
+                })
+                .catch((err) => {
+                    res.status(404).json({ message: "Failed to delete the category!" })
+                })
+        } catch (error) {
+            res.status(500).json({
+                message: "Failed to delete category! Unexpected error has occurred.",
+            })
+
+            console.error("Failed to delete category!", error)
         }
     }
 }
