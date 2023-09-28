@@ -1,8 +1,8 @@
 import express from "express"
 import userAPI from "./user"
 import authAPI from "./auth"
-import Middleware from "../middleware/verifyToken"
 import categoryAPI from "./category"
+import Middleware from "../middleware/verifyToken"
 
 const router = express.Router()
 
