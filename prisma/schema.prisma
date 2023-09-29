@@ -22,7 +22,7 @@ model User {
   password   String    @db.VarChar(255)
   role       Role      @default(USER)
   isVerified Boolean   @default(false) @map("is_verified")
-  picture    String    @db.VarChar(255)
+  picture    String?   @db.VarChar(255)
   createdAt  DateTime  @default(now()) @map("created_at") @db.Timestamptz()
   updatedAt  DateTime? @map("updated_at") @db.Timestamptz()
 
