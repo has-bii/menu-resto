@@ -10,7 +10,7 @@ router.use("/auth", authAPI)
 
 router.use(Middleware.verifyToken)
 
-router.use("/users", userAPI)
+router.use("/user", userAPI)
 
 router.use("/category", categoryAPI)
 

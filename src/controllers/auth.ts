@@ -20,8 +20,6 @@ interface ICookieOptions {
     expires?: Date
 }
 
-const salt = bcrypt.genSaltSync(10)
-
 const USER = prisma.user
 const TOKEN = prisma.token
 
@@ -48,7 +46,7 @@ class AuthController {
                 data: {
                     name: user.name,
                     email: user.email,
-                    password: bcrypt.hashSync(user.password, salt),
+                    password: bcrypt.hashSync(user.password, env.SALT),
                 },
             }).catch((error) => {
                 throw new Error(`Failed to create new user\nError: ${error}`)
