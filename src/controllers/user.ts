@@ -11,7 +11,6 @@ interface IEditBody {
     email?: string
     password: string
     newPassword?: string
-    isVerified?: string
 }
 
 class UsersController {
