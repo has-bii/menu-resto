@@ -7,6 +7,7 @@ export const schema = {
     BASE_URL: String,
     DATABASE_URL: String,
     SECRET_KEY: String,
+    SALT: String,
     PORT: Number,
 }
 

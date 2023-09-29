@@ -1,9 +1,13 @@
 import fs from "fs"
 import crypto from "crypto"
+import bcrypt from "bcrypt"
 
 const PATH = ".env"
 const MARKER = "SECRET_KEY="
 const secretKey = crypto.randomBytes(32).toString("hex")
+
+const MARKER2 = "SALT="
+const salt = bcrypt.genSaltSync(10)
 
 try {
     // Check if .env exists
@@ -23,12 +27,25 @@ try {
     }
 
     // Inserting Secret Key to .env file
-    const updatedData =
+    const updatedDataSecretKey =
         data.slice(0, markerIndex + MARKER.length) +
         secretKey +
         data.slice(markerIndex + MARKER.length)
 
-    // Writing updated content of .enf file
+    // Finding SALT= index
+    const markerIndex2 = updatedDataSecretKey.indexOf(MARKER2)
+
+    if (markerIndex2 === -1) {
+        throw new Error("Marker not found in the file.")
+    }
+
+    // Inserting Salt to .env file
+    const updatedData =
+        updatedDataSecretKey.slice(0, markerIndex2 + MARKER2.length) +
+        salt +
+        updatedDataSecretKey.slice(markerIndex2 + MARKER2.length)
+
+    // Writing updated content of .env file
     fs.writeFileSync(PATH, updatedData, "utf-8")
 
     console.log("Secret Key generated successfully")
