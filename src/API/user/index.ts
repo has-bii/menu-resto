@@ -9,4 +9,10 @@ userAPI.get("/", UsersController.getAllUsers)
 // Edit
 userAPI.put("/edit", UsersController.edit)
 
+// Edit multiple records
+userAPI.put("/edit-users", UsersController.editUsers)
+
+// Delete user
+userAPI.delete("/delete", UsersController.deleteUsers)
+
 export default userAPI
