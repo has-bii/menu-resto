@@ -7,6 +7,7 @@ import router from "./API"
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import { createProxyMiddleware } from "http-proxy-middleware"
+import fileUpload from "express-fileupload"
 
 const app = express()
 const port = env.PORT || 3000
@@ -24,6 +25,12 @@ app.use(cookieParser())
 // Enable body parser
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use(
+    fileUpload({
+        limits: { fileSize: 5 * 1024 * 1024 },
+    })
+)
 
 app.use("/api", router)
 
