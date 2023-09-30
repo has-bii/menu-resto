@@ -21,12 +21,6 @@ interface IEditUsersBody {
     role: Role
 }
 
-interface IFileUpload {
-    name: string
-    mimetype: string
-    mv: Function
-}
-
 class UsersController {
     static async getAllUsers(req: Request, res: Response) {
         try {
