@@ -29,11 +29,13 @@
     },
     "dependencies": {
         "@prisma/client": "^5.3.1",
+        "@types/express-fileupload": "^1.4.2",
         "@types/http-proxy-middleware": "^1.0.0",
         "bcrypt": "^5.1.1",
         "body-parser": "^1.20.2",
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
+        "express-fileupload": "^1.4.1",
         "http-proxy-middleware": "^2.0.6",
         "jsonwebtoken": "^9.0.2",
         "ts-dotenv": "^0.9.1"
