@@ -65,7 +65,7 @@ class UsersController {
             const user: IUser = req.body.user
             const picture = req.files?.picture as UploadedFile
 
-            const publicPath = "fronted/public"
+            const publicPath = "frontend/public"
             let uploadPath = ""
 
             const userRecord = await prisma.user.findUniqueOrThrow({ where: { id: user.id } })
@@ -96,7 +96,7 @@ class UsersController {
                 }
 
                 // Define uploading path
-                uploadPath = "/photos/" + picture.name
+                uploadPath = "/photos/" + `${user.id}_photo.${picture.mimetype.split("/")[1]}`
 
                 // Move file to public/picture
                 picture.mv(publicPath + uploadPath, (err) => {

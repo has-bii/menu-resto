@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import prisma from "../lib/prisma"
+import { IUser } from "../types/global"
 
 interface ICategoryQuery {
     id?: string
@@ -53,6 +54,7 @@ export default class CategoryController {
     static async create(req: Request, res: Response) {
         try {
             const name: string = req.body.name
+            const user: IUser = req.body.user
 
             if (!name) {
                 res.status(404).json({
@@ -62,7 +64,13 @@ export default class CategoryController {
                 return
             }
 
-            const data = await prisma.category.create({ data: { name: name } })
+            const categoryRecord = await prisma.category.findFirst({
+                where: { userId: user.id, name: name },
+            })
+
+            if (categoryRecord) return res.status(400).json({ message: "Category already exists!" })
+
+            const data = await prisma.category.create({ data: { name: name, userId: user.id } })
 
             res.status(200).json({ message: "New category has been created.", data })
         } catch (error) {
@@ -77,6 +85,7 @@ export default class CategoryController {
     static async edit(req: Request, res: Response) {
         try {
             const body: ICategoryQuery = req.body
+            const user: IUser = req.body.user
 
             if (!body.id || !body.name) {
                 res.status(404).json({
@@ -87,7 +96,10 @@ export default class CategoryController {
             }
 
             await prisma.category
-                .update({ where: { id: parseInt(body.id) }, data: { name: body.name } })
+                .update({
+                    where: { id: parseInt(body.id), userId: user.id },
+                    data: { name: body.name },
+                })
                 .then(() => {
                     res.status(200).json({ message: "The category edited successfully" })
                 })

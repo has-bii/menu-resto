@@ -27,7 +27,8 @@ model User {
   updatedAt  DateTime? @map("updated_at") @db.Timestamptz()
 
   // Relations
-  menus Menu[]
+  menus      Menu[]
+  categories Category[]
 
   @@map("users")
 }
@@ -42,14 +43,15 @@ model Token {
 }
 
 model Menu {
-  id         Int      @id @default(autoincrement())
-  name       String   @db.VarChar(255)
-  desc       String   @db.Text
-  userId     Int      @map("user_id")
-  categoryId Int      @map("category_id")
-  price      Float    @db.DoublePrecision
-  createdAt  DateTime @map("created_at") @db.Timestamptz()
-  udpatedAt  DateTime @map("updated_at") @db.Timestamptz()
+  id         Int       @id @default(autoincrement())
+  name       String    @db.VarChar(255)
+  desc       String?   @db.Text
+  userId     Int       @map("user_id")
+  categoryId Int       @map("category_id")
+  price      Float     @db.DoublePrecision
+  picture    String?   @db.VarChar(255)
+  createdAt  DateTime  @map("created_at") @db.Timestamptz()
+  updatedAt  DateTime? @map("updated_at") @db.Timestamptz()
 
   // Relation
   user     User     @relation(fields: [userId], references: [id])
@@ -59,11 +61,13 @@ model Menu {
 }
 
 model Category {
-  id   Int    @id @default(autoincrement())
-  name String @unique @db.VarChar(255)
+  id     Int    @id @default(autoincrement())
+  name   String @unique @db.VarChar(255)
+  userId Int    @map("user_id")
 
   // Relations
   menus Menu[]
+  user  User   @relation(fields: [userId], references: [id])
 
   @@map("categories")
 }
