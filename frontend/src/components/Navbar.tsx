@@ -1,7 +1,8 @@
-import { faBars, faBowlRice } from "@fortawesome/free-solid-svg-icons"
+import { faBars } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
+import Logo from "./Logo"
 
 export default function Navbar() {
     const location = useLocation()
@@ -10,10 +11,7 @@ export default function Navbar() {
     return (
         <div className="flex flex-row items-center gap-4 justify-between py-6 px-4 lg:px-0 overflow-hidden">
             {/* Logo */}
-            <Link to={"/"} className="inline-flex items-center gap-3">
-                <FontAwesomeIcon icon={faBowlRice} size="2xl" className=" text-orange-500" />
-                <span className="font-extrabold text-black text-xl">My Menu</span>
-            </Link>
+            <Logo />
 
             {/* Navlist */}
             <ul className={`navlist ${showNav ? "show-nav" : ""}`}>
@@ -55,9 +53,12 @@ export default function Navbar() {
                     </Link>
                 </li>
                 <li className="block lg:hidden">
-                    <button className="capitalize px-4 py-2 rounded-full font-semibold border border-white text-white hover:bg-white hover:text-orange-500 transition-colors duration-150 ease-in">
+                    <Link
+                        to={"/auth"}
+                        className="capitalize px-4 py-2 rounded-full font-semibold border border-white text-white hover:bg-white hover:text-orange-500 transition-colors duration-150 ease-in"
+                    >
                         sign in
-                    </button>
+                    </Link>
                 </li>
             </ul>
 
@@ -66,9 +67,12 @@ export default function Navbar() {
             </button>
 
             {/* Signin */}
-            <button className="capitalize hidden lg:block px-4 py-2 rounded-full font-semibold border border-orange-500 text-orange-500 hover:text-white hover:bg-orange-500 transition-colors duration-150 ease-in">
+            <Link
+                to={"/auth"}
+                className="capitalize hidden lg:block px-4 py-2 rounded-full font-semibold border border-orange-500 text-orange-500 hover:text-white hover:bg-orange-500 transition-colors duration-150 ease-in"
+            >
                 sign in
-            </button>
+            </Link>
         </div>
     )
 }

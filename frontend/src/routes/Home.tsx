@@ -25,7 +25,7 @@ export default function Home() {
                     </div>
                 </button>
                 <div className="static mt-4 lg:mt-0 lg:absolute -z-10 bottom-10 lg:-bottom-52 lg:left-1/2 lg:-translate-x-1/2 w-full px-4 lg:px-0 lg:w-4/5">
-                    <img src={macbook} alt="" className="w-full h-full" />
+                    <img src={macbook} alt="" className="w-full h-full" loading="eager" />
                 </div>
             </div>
         </LandingPageLayout>

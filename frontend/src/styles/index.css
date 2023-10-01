@@ -30,6 +30,10 @@
     h6 {
         @apply text-lg;
     }
+
+    input {
+        @apply outline-none;
+    }
 }
 
 .navlist {
@@ -46,4 +50,31 @@
 
 .nav-item.active {
     @apply underline underline-offset-4 lg:text-orange-500;
+}
+
+@layer components {
+    .card {
+        @apply border rounded-3xl drop-shadow-lg px-8 py-6 bg-background;
+    }
+}
+
+.card-head {
+    @apply text-3xl font-bold text-center;
+}
+
+.card-subhead {
+    @apply font-light text-neutral-400 text-center max-w-xs mb-4;
+}
+
+.auth-form {
+    @apply flex flex-col gap-2 w-3/4;
+}
+
+.auth-form > label {
+    @apply block font-bold;
+}
+
+.auth-form > input,
+.auth-form > .input-container {
+    @apply px-4 py-2 bg-transparent border border-neutral-300 rounded-3xl mb-2 inline-flex justify-between items-center font-semibold;
 }
