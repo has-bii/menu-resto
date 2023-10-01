@@ -1,13 +1,15 @@
-import { ReactNode } from 'react'
+import { ReactNode } from "react"
+import Navbar from "../components/Navbar"
 
 type Props = {
     children: ReactNode
 }
 
-export default function LandingPageLayout({children}: Props) {
-  return (
+export default function LandingPageLayout({ children }: Props) {
+    return (
         <div className="container mx-auto">
-          {children}
+            <Navbar />
+            {children}
         </div>
-  )
+    )
 }

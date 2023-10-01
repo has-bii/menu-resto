@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-background;
+    }
+
+    h1 {
+        @apply text-7xl;
+    }
+
+    h2 {
+        @apply text-5xl;
+    }
+
+    h3 {
+        @apply text-4xl;
+    }
+
+    h4 {
+        @apply text-2xl;
+    }
+
+    h5 {
+        @apply text-xl;
+    }
+
+    h6 {
+        @apply text-lg;
+    }
+}
+
+.navlist {
+    @apply fixed lg:static w-[50vw] h-screen lg:w-fit lg:h-fit p-6 lg:p-0 top-0 -right-full transition-all duration-300 ease-in bg-orange-500 flex flex-col lg:flex-row gap-4 lg:gap-8 items-end lg:items-center lg:bg-transparent z-20;
+}
+
+.navlist.show-nav {
+    @apply right-0;
+}
+
+.nav-item {
+    @apply capitalize text-lg text-white lg:text-black font-semibold hover:underline-offset-4 hover:underline lg:hover:text-orange-500 transition-all duration-150 ease-in;
+}
+
+.nav-item.active {
+    @apply underline underline-offset-4 lg:text-orange-500;
+}
