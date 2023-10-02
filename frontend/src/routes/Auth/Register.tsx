@@ -17,8 +17,8 @@ export default function Register() {
             </div>
 
             <form className="auth-form">
-                <label htmlFor="fullname-input">Fullname</label>
-                <input type="text" id="fullname-input" placeholder="Enter your full name" />
+                <label htmlFor="fullname-input">Restaurant Name</label>
+                <input type="text" id="fullname-input" placeholder="Enter your Restaurant name" />
                 <label htmlFor="email-input">Email</label>
                 <input type="email" id="email-input" placeholder="Enter your email" />
                 <label htmlFor="password-input">Password</label>
