@@ -6,6 +6,7 @@ import "./styles/index.css"
 import Signin from "./routes/Auth/Signin"
 import Register from "./routes/Auth/Register"
 import Forgot from "./routes/Auth/Forgot"
+import { ToastProvider } from "./providers/ToastProvider"
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <ToastProvider>
+            <RouterProvider router={router} />
+        </ToastProvider>
     </React.StrictMode>
 )
