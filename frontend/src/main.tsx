@@ -5,6 +5,7 @@ import React from "react"
 import "./styles/index.css"
 import Signin from "./routes/Auth/Signin"
 import Register from "./routes/Auth/Register"
+import Forgot from "./routes/Auth/Forgot"
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
     {
         path: "/auth/register",
         element: <Register />,
+    },
+    {
+        path: "/auth/forgot",
+        element: <Forgot />,
     },
 ])
 
