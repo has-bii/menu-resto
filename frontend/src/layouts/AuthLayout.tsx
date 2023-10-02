@@ -10,12 +10,12 @@ type Props = {
 export default function AuthLayout({ children, image }: Props) {
     return (
         <div className="w-screen h-screen flex flex-row justify-center items-center">
-            <div className="w-1/2 h-full relative p-6">
+            <div className="w-full lg:w-1/2 h-full relative p-6">
                 <div className="flex justify-between items-center">
                     <Logo />
                     <Navigation />
                 </div>
-                <div className="flex w-3/4 flex-col items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div className="flex w-full lg:w-3/4 flex-col items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     {children}
                 </div>
             </div>
