@@ -76,5 +76,37 @@
 
 .auth-form > input,
 .auth-form > .input-container {
-    @apply px-4 py-2 bg-transparent border border-neutral-300 rounded-3xl mb-2 inline-flex justify-between items-center font-semibold;
+    @apply px-4 py-2 bg-transparent border border-neutral-300 rounded-3xl inline-flex justify-between items-center font-semibold;
+}
+
+.auth-form > input.error {
+    @apply border-red-500;
+}
+
+.toast-container {
+    @apply fixed px-4 lg:px-0 top-4 lg:top-6 lg:right-6 z-40 flex flex-col gap-2;
+}
+
+.toast-container > .toast-item {
+    @apply inline-flex items-center border gap-4 px-4 py-2 first-letter:uppercase rounded-xl shadow-md;
+}
+
+.toast-item > p {
+    @apply lg:max-w-sm text-sm lg:text-base;
+}
+
+.toast-item.success {
+    @apply bg-green-100 border-green-200 shadow-green-500/10 text-green-400;
+}
+
+.toast-item.normal {
+    @apply bg-sky-100 border-sky-200 shadow-sky-500/10 text-sky-400;
+}
+
+.toast-item.danger {
+    @apply bg-yellow-100 border-yellow-200 shadow-yellow-500/10 text-yellow-500;
+}
+
+.toast-item.error {
+    @apply bg-red-100 border-red-200 shadow-red-500/10 text-red-400;
 }

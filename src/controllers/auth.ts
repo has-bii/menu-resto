@@ -77,7 +77,7 @@ class AuthController {
 
             // Return response
             if (data === null) {
-                res.status(401).json({ message: "User does not exist!" })
+                res.status(401).json({ message: "Email is not registered!" })
                 return
             }
 
@@ -104,8 +104,7 @@ class AuthController {
             }
 
             // Add expire to the token
-            if (req.body.save === "true")
-                cookieOptions.expires = new Date(Date.now() + 7 * 86400000)
+            if (req.body.save === true) cookieOptions.expires = new Date(Date.now() + 7 * 86400000)
 
             // Create or Update Token in DB
             await TOKEN.upsert({
