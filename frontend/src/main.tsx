@@ -8,6 +8,9 @@ import Register from "./routes/Auth/Register"
 import Forgot from "./routes/Auth/Forgot"
 import App from "./routes/App/App"
 import { ToastProvider } from "./providers/ToastProvider"
+import Menu from "./routes/App/Menu"
+import Category from "./routes/App/Category"
+import Profile from "./routes/App/Profile"
 
 const router = createBrowserRouter([
     {
@@ -29,6 +32,18 @@ const router = createBrowserRouter([
     {
         path: "/app",
         element: <App />,
+    },
+    {
+        path: "/app/menus",
+        element: <Menu />,
+    },
+    {
+        path: "/app/categories",
+        element: <Category />,
+    },
+    {
+        path: "/app/profile",
+        element: <Profile />,
     },
 ])
 
