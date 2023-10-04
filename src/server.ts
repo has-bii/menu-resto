@@ -40,7 +40,7 @@ if (env.NODE_ENV === "development") {
     app.use("/", createProxyMiddleware({ target: env.BASE_URL, changeOrigin: true }))
 } else {
     // Serve Vite's static files in production
-    app.use("/", express.static("frontend/dist"))
+    app.use("/", express.static("./frontend"))
 }
 
 app.listen(port, () => {
