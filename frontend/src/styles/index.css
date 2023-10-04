@@ -36,19 +36,19 @@
     }
 }
 
-.navlist {
+.header {
     @apply fixed lg:static w-[50vw] h-screen lg:w-fit lg:h-fit p-6 lg:p-0 top-0 -right-full transition-all duration-300 ease-in bg-orange-500 flex flex-col lg:flex-row gap-4 lg:gap-8 items-end lg:items-center lg:bg-transparent z-20;
 }
 
-.navlist.show-nav {
+.header.show-nav {
     @apply right-0;
 }
 
-.nav-item {
+.header-item {
     @apply capitalize text-lg text-white lg:text-black font-semibold hover:underline-offset-4 hover:underline lg:hover:text-orange-500 transition-all duration-150 ease-in;
 }
 
-.nav-item.active {
+.header-item.active {
     @apply underline underline-offset-4 lg:text-orange-500;
 }
 
@@ -109,4 +109,40 @@
 
 .toast-item.error {
     @apply bg-red-100 border-red-200 shadow-red-500/10 text-red-400;
+}
+
+.navbar-container {
+    @apply w-fit h-full flex flex-col bg-background divide-y gap-4 pt-4;
+}
+
+.navbar-header {
+    @apply flex justify-center gap-8 items-center px-4;
+}
+
+.navbar-list {
+    @apply py-4 px-4;
+}
+
+ul.navbar-list > li > .nav-item {
+    @apply px-2 py-1.5 rounded-lg inline-flex gap-4 items-center my-0.5 w-full;
+}
+
+ul.navbar-list > li > .nav-item.active {
+    @apply bg-orange-100;
+}
+
+.nav-item > .nav-icon {
+    @apply w-8 h-8 rounded-lg border border-neutral-400 text-neutral-400 relative;
+}
+
+.nav-item.active > .nav-icon {
+    @apply border-0 bg-orange-500 text-white;
+}
+
+.nav-item > .nav-item-title {
+    @apply font-semibold text-neutral-400;
+}
+
+.nav-item.active > .nav-item-title {
+    @apply text-orange-500;
 }

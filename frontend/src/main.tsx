@@ -6,6 +6,7 @@ import "./styles/index.css"
 import Signin from "./routes/Auth/Signin"
 import Register from "./routes/Auth/Register"
 import Forgot from "./routes/Auth/Forgot"
+import App from "./routes/App/App"
 import { ToastProvider } from "./providers/ToastProvider"
 
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
     {
         path: "/auth/forgot",
         element: <Forgot />,
+    },
+    {
+        path: "/app",
+        element: <App />,
     },
 ])
 

@@ -63,7 +63,7 @@ export default function Signin() {
                     }
 
                     pushToast(message, "error")
-                }
+                } else pushToast("Error server", "error")
             })
             .finally(() => setLoading(false))
     }

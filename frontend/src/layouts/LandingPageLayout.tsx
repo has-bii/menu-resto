@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import Navbar from "../components/Navbar"
+import Header from "../components/Header"
 
 type Props = {
     children: ReactNode
@@ -8,7 +8,7 @@ type Props = {
 export default function LandingPageLayout({ children }: Props) {
     return (
         <div className="container mx-auto">
-            <Navbar />
+            <Header />
             {children}
         </div>
     )

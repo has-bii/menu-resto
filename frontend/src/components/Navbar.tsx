@@ -1,78 +1,124 @@
-import { faBars } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
-import { Link, useLocation } from "react-router-dom"
 import Logo from "./Logo"
+import {
+    faArrowRightFromBracket,
+    faHome,
+    faList,
+    faTableColumns,
+    faUser,
+    faUtensils,
+} from "@fortawesome/free-solid-svg-icons"
+import { Link, useLocation } from "react-router-dom"
+import { useState } from "react"
+
+const NavItems = [
+    {
+        title: "Dashboard",
+        icon: faHome,
+        path: "/app",
+    },
+    {
+        title: "Menu",
+        icon: faUtensils,
+        path: "/app/menus",
+    },
+    {
+        title: "Category",
+        icon: faList,
+        path: "/app/categories",
+    },
+]
+
+const NavSettingItems = [
+    {
+        title: "Profile",
+        icon: faUser,
+        path: "/app/profile",
+    },
+]
 
 export default function Navbar() {
+    const [show, setShow] = useState(true)
     const location = useLocation()
-    const [showNav, setShowNav] = useState(false)
 
     return (
-        <div className="flex flex-row items-center gap-4 justify-between py-6 px-4 lg:px-0 overflow-hidden">
-            {/* Logo */}
-            <Logo />
-
-            {/* Navlist */}
-            <ul className={`navlist ${showNav ? "show-nav" : ""}`}>
-                <li className="block lg:hidden text-white">
-                    <button onClick={() => setShowNav(!showNav)}>
-                        <FontAwesomeIcon icon={faBars} size="xl" />
+        <div className="navbar-container">
+            <div className="navbar-header">
+                <Logo show={show} />
+                {show && (
+                    <button
+                        className="text-neutral-500 w-8 h-8 border rounded-lg hover:border-0 hover:text-white hover:bg-black"
+                        onClick={() => setShow(false)}
+                    >
+                        <FontAwesomeIcon icon={faTableColumns} />
                     </button>
-                </li>
-                <li>
-                    <Link
-                        to={"/"}
-                        className={`nav-item ${location.pathname === "/" ? "active" : ""}`}
-                    >
-                        <span>home</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link
-                        to={"/feature"}
-                        className={`nav-item ${location.pathname === "/feature" ? "active" : ""}`}
-                    >
-                        <span>feature</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link
-                        to={"/pricing"}
-                        className={`nav-item ${location.pathname === "/pricing" ? "active" : ""}`}
-                    >
-                        <span>pricing</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link
-                        to={"/developer"}
-                        className={`nav-item ${location.pathname === "/developer" ? "active" : ""}`}
-                    >
-                        <span>developer</span>
-                    </Link>
-                </li>
-                <li className="block lg:hidden">
-                    <Link
-                        to={"/auth"}
-                        className="capitalize px-4 py-2 rounded-full font-semibold border border-white text-white hover:bg-white hover:text-orange-500 transition-colors duration-150 ease-in"
-                    >
-                        sign in
-                    </Link>
-                </li>
+                )}
+            </div>
+
+            <ul className="navbar-list">
+                {NavItems.map((item, i) => (
+                    <li key={i} className="group/nav">
+                        <Link
+                            to={item.path}
+                            className={`nav-item group-hover/nav:bg-orange-100 ${
+                                location.pathname === item.path ? "active" : ""
+                            }`}
+                        >
+                            <span className="nav-icon group-hover/nav:bg-orange-500 group-hover/nav:border-0 group-hover/nav:text-white">
+                                <FontAwesomeIcon
+                                    icon={item.icon}
+                                    className=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                                />
+                            </span>
+                            {show && (
+                                <span className="nav-item-title group-hover/nav:text-orange-500">
+                                    {item.title}
+                                </span>
+                            )}
+                        </Link>
+                    </li>
+                ))}
             </ul>
 
-            <button className="lg:hidden block" onClick={() => setShowNav(!showNav)}>
-                <FontAwesomeIcon icon={faBars} size="xl" />
-            </button>
-
-            {/* Signin */}
-            <Link
-                to={"/auth"}
-                className="capitalize hidden lg:block px-4 py-2 rounded-full font-semibold border border-orange-500 text-orange-500 hover:text-white hover:bg-orange-500 transition-colors duration-150 ease-in"
-            >
-                sign in
-            </Link>
+            <ul className="navbar-list mt-auto">
+                {NavSettingItems.map((item, i) => (
+                    <li key={i} className="group/nav">
+                        <Link
+                            to={item.path}
+                            className={`nav-item group-hover/nav:bg-orange-100 ${
+                                location.pathname === item.path ? "active" : ""
+                            }`}
+                        >
+                            <span className="nav-icon group-hover/nav:bg-orange-500 group-hover/nav:border-0 group-hover/nav:text-white">
+                                <FontAwesomeIcon
+                                    icon={item.icon}
+                                    className=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                                />
+                            </span>
+                            {show && (
+                                <span className="nav-item-title group-hover/nav:text-orange-500">
+                                    {item.title}
+                                </span>
+                            )}
+                        </Link>
+                    </li>
+                ))}
+                <li className="group/nav">
+                    <button className="nav-item group-hover/nav:bg-orange-100">
+                        <span className="nav-icon group-hover/nav:bg-orange-500 group-hover/nav:border-0 group-hover/nav:text-white">
+                            <FontAwesomeIcon
+                                icon={faArrowRightFromBracket}
+                                className=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                            />
+                        </span>
+                        {show && (
+                            <span className="nav-item-title group-hover/nav:text-orange-500">
+                                Logout
+                            </span>
+                        )}
+                    </button>
+                </li>
+            </ul>
         </div>
     )
 }
