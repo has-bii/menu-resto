@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import AuthLayout from "../../layouts/AuthLayout"
 import { faCircleNotch, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
 import { FormEvent, useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import image from "../../images/register-img.jpg"
 import axios from "axios"
 import { useToast } from "../../providers/ToastProvider"
@@ -13,6 +13,7 @@ type FormData = {
 }
 
 export default function Signin() {
+    const navigate = useNavigate()
     const [loading, setLoading] = useState<boolean>(false)
     const { pushToast } = useToast()
     const [showPassword, setShowPassword] = useState(false)
@@ -46,9 +47,7 @@ export default function Signin() {
             .post("/api/auth/login", { ...formData, save })
             .then((res) => {
                 pushToast(res.data.message, "success")
-                pushToast("Redirecting to Dashboard...", "normal")
-
-                // setTimeout(() => navigate("/auth"), 3000)
+                navigate("/app")
             })
             .catch((error) => {
                 if (error?.response?.data?.message) {
@@ -63,7 +62,7 @@ export default function Signin() {
                     }
 
                     pushToast(message, "error")
-                } else pushToast("Error server", "error")
+                } else pushToast("Server error", "error")
             })
             .finally(() => setLoading(false))
     }

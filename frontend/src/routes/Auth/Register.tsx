@@ -71,9 +71,7 @@ export default function Register() {
             .post("/api/auth/register", formData)
             .then((res) => {
                 pushToast(res.data.message, "success")
-                pushToast("Redirecting to login page...", "normal")
-
-                setTimeout(() => navigate("/auth"), 3000)
+                navigate("/auth")
             })
             .catch((error) => {
                 if (error?.response?.data?.message) pushToast(error.response.data.message, "error")
