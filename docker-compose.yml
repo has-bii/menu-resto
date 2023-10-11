@@ -11,7 +11,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL="postgresql://postgres:d4rk4ng3l@db:5432/restomenu?schema=public"
+      - DATABASE_URL=postgresql://postgres:d4rk4ng3l@db:5432/restomenu?schema=public
     networks:
       - db-network
 

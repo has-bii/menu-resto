@@ -48,7 +48,7 @@ class AuthController {
                     email: user.email,
                     password: bcrypt.hashSync(user.password, env.SALT),
                 },
-            }).catch((error) => {
+            }).catch((error: any) => {
                 throw new Error(`Failed to create new user\nError: ${error}`)
             })
 

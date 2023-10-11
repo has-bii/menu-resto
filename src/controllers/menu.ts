@@ -39,7 +39,7 @@ export default class MenuController {
 
             const data = await prisma.menu
                 .findMany({ where: { userId: user.id } })
-                .catch((error) => {
+                .catch((error: string | undefined) => {
                     throw new Error(error)
                 })
 
