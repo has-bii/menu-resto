@@ -38,4 +38,4 @@ jobs:
 
       - name: Pull and run the Docker image on the server
         run: |
-          docker compose up -d
+          cd /home/hasbii/Projects/Apps/menu-resto && docker compose up -d
