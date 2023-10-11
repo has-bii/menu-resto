@@ -38,11 +38,4 @@ jobs:
 
       - name: Pull and run the Docker image on the server
         run: |
-          docker pull hasbii/resto-menu:latest
-          docker stop MenuResto || true
-          docker rm MenuResto || true
-          docker run -d --name MenuResto -p 3000:3000 hasbii/resto-menu:latest --env DATABASE_URL=${{ secrets.DATABASE_URL }}
-
-      - name: Migrate
-        run: |
-          docker exec MenuResto npx prisma migrate deploy
+          docker compose up -d
