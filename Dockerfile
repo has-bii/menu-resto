@@ -11,7 +11,6 @@ COPY --from=build /app/dist ./dist
 COPY --from=build /app/.env ./
 COPY package*.json ./
 RUN npm install
-RUN npm install @
-RUN npx prisma migrate dev --name init
+RUN npx prisma generate
 EXPOSE 3000
 CMD ["npm", "run", "start"]
