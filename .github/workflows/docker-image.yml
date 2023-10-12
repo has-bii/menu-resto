@@ -33,20 +33,6 @@ jobs:
                 username: ${{ secrets.DOCKER_USERNAME }}
                 password: ${{ secrets.DOCKER_PASSWORD }}
 
-            - name: Docker meta
-              id: docker_meta
-              uses: docker/metadata-action@v5
-              with:
-                images: hasbii/resto-menu
-                flavor: |
-                  latest=false
-                tags: |
-                  type=raw,value=04
-                  type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
-                  type=ref,event=pr
-                  type=ref,event=branch
-                  type=semver,pattern={{version}}
-
             - name: Docker build
               uses: docker/build-push-action@v5
               with:
