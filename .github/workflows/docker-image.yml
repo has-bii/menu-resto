@@ -1,7 +1,7 @@
 name: Build and Deploy
 
 on:
-    push:
+    pull_request:
         branches:
             - main
 
@@ -10,33 +10,46 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout code
-              uses: actions/checkout@v2
+            - name: Checkout
+              uses: actions/checkout@v3
 
-            - name: Build Docker image
-              run: docker build -t hasbii/resto-menu:latest .
-
-            - name: Log in to Docker Hub
-              run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-            - name: Push Docker image to Docker Hub
-              run: docker push hasbii/resto-menu:latest
-
-    deploy:
-        runs-on: ubuntu-latest
-
-        needs: build
-
-        steps:
-            - name: SSH & Compose up
-              uses: appleboy/ssh-action@v1.0.0
+            - name: Docker meta
+              id: meta
+              uses: docker/metadata-action@v4
               with:
-                  host: ${{ secrets.SERVER_IP }}
-                  username: ${{ secrets.SERVER_USERNAME }}
-                  password: ${{ secrets.SSH_PASSWORD }}
-                  port: ${{ secrets.SSH_PORT }}
-                  script: |
-                      docker stop MenuResto || true
-                      docker rm MenuResto || true
-                      docker run --name MenuResto --network db-network --restart=always -p 3000:3000 -e DATABASE_URL=${{ secrets.DATABASE_URL }} -d hasbii/resto-menu:latest
-                      docker exec MenuResto npx prisma migrate deploy
+                images: |
+                  sidpalas/devops-directive-docker-course-api-node
+                tags: |
+                  type=raw,value=latest
+                  type=ref,event=branch
+                  type=ref,event=pr
+                  type=semver,pattern={{version}}
+                  type=semver,pattern={{major}}.{{minor}}
+                  type=raw,value={{date 'YYYYMMDD'}}-{{sha}}
+
+            - name: Login to Docker Hub
+              uses: docker/login-action@v2
+              with:
+                username: ${{ secrets.DOCKERHUB_USERNAME }}
+                password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+            - name: Docker meta
+              id: docker_meta
+              uses: docker/metadata-action@v5
+              with:
+                images: hasbii/resto-menu
+                flavor: |
+                  latest=false
+                tags: |
+                  type=raw,value=04
+                  type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
+                  type=ref,event=pr
+                  type=ref,event=branch
+                    type=semver,pattern={{version}}
+
+            - name: Docker build
+              uses: docker/build-push-action@v5
+              with:
+                push: true
+                tags: ${{ steps.docker_meta.outputs.tags }}
+                labels: ${{ steps.docker_meta.outputs.labels }}
