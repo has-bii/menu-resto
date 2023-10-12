@@ -103,8 +103,8 @@ export default class CategoryController {
                 .then(() => {
                     res.status(200).json({ message: "The category edited successfully" })
                 })
-                .catch((err) => {
-                    console.error(err)
+                .catch((error: any) => {
+                    console.error(error)
                     res.status(404).json({ message: "Failed to edit the category!" })
                 })
         } catch (error) {
@@ -131,10 +131,10 @@ export default class CategoryController {
                 .delete({
                     where: { id: parseInt(paramId) },
                 })
-                .then((data) => {
+                .then((data: { name: any }) => {
                     res.status(200).json({ message: `${data.name} category has been deleted` })
                 })
-                .catch((err) => {
+                .catch(() => {
                     res.status(404).json({ message: "Failed to delete the category!" })
                 })
         } catch (error) {

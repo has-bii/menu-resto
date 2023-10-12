@@ -99,7 +99,7 @@ class UsersController {
                 uploadPath = "/photos/" + `${user.id}_photo.${picture.mimetype.split("/")[1]}`
 
                 // Move file to public/picture
-                picture.mv(publicPath + uploadPath, (err) => {
+                picture.mv(publicPath + uploadPath, (err: any) => {
                     if (err) {
                         return res.status(500).json({ message: "Error uploading file." })
                     }
