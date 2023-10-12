@@ -1,11 +1,9 @@
 name: Build and Deploy
 
 on:
-    push:
+    pull_request:
         branches:
-            - "main"
-        tags:
-            - "v*"
+            - "production"
 
 jobs:
     build:
