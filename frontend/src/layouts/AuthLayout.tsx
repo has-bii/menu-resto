@@ -1,6 +1,8 @@
-import { ReactNode } from "react"
+import { ReactNode, useEffect } from "react"
 import Logo from "../components/Logo"
 import Navigation from "../components/Navigation"
+import { useCookies } from "react-cookie"
+import { useNavigate } from "react-router-dom"
 
 type Props = {
     children: ReactNode
@@ -8,6 +10,14 @@ type Props = {
 }
 
 export default function AuthLayout({ children, image }: Props) {
+    const [cookies] = useCookies(["user_access"])
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (cookies.user_access) navigate("/app")
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     return (
         <div className="w-screen h-screen flex flex-row justify-center items-center">
             <div className="w-full lg:w-1/2 h-full relative p-6">

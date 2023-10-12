@@ -11,6 +11,7 @@ import { ToastProvider } from "./providers/ToastProvider"
 import Menu from "./routes/App/Menu"
 import Category from "./routes/App/Category"
 import Profile from "./routes/App/Profile"
+import { CookiesProvider } from "react-cookie"
 
 const router = createBrowserRouter([
     {
@@ -49,8 +50,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <ToastProvider>
-            <RouterProvider router={router} />
-        </ToastProvider>
+        <CookiesProvider defaultSetOptions={{ path: "/" }}>
+            <ToastProvider>
+                <RouterProvider router={router} />
+            </ToastProvider>
+        </CookiesProvider>
     </React.StrictMode>
 )

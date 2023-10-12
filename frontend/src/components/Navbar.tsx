@@ -8,8 +8,9 @@ import {
     faUser,
     faUtensils,
 } from "@fortawesome/free-solid-svg-icons"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useState } from "react"
+import { useCookies } from "react-cookie"
 
 const NavItems = [
     {
@@ -40,6 +41,13 @@ const NavSettingItems = [
 export default function Navbar() {
     const [show, setShow] = useState(true)
     const location = useLocation()
+    const [, , removeCookie] = useCookies(["user_access"])
+    const navigate = useNavigate()
+
+    const logoutHandler = () => {
+        removeCookie("user_access")
+        navigate("/auth")
+    }
 
     return (
         <div className="navbar-container">
@@ -104,7 +112,10 @@ export default function Navbar() {
                     </li>
                 ))}
                 <li className="group/nav">
-                    <button className="nav-item group-hover/nav:bg-orange-100">
+                    <button
+                        onClick={logoutHandler}
+                        className="nav-item group-hover/nav:bg-orange-100"
+                    >
                         <span className="nav-icon group-hover/nav:bg-orange-500 group-hover/nav:border-0 group-hover/nav:text-white">
                             <FontAwesomeIcon
                                 icon={faArrowRightFromBracket}
