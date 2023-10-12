@@ -56,5 +56,5 @@ jobs:
                   script: |
                       docker stop MenuResto || true
                       docker rm MenuResto || true
-                      docker run --name MenuResto --network db-network --restart=always -p 3000:3000 -e DATABASE_URL=${{ secrets.DATABASE_URL }} -d hasbii/resto-menu:latest
+                      docker run --name MenuResto --network db-network --restart=always -p ${{ secrets.DOCKER_PORT }}:3000 -e DATABASE_URL=${{ secrets.DATABASE_URL }} -d hasbii/resto-menu:latest
                       docker exec MenuResto npx prisma migrate deploy
