@@ -14,7 +14,10 @@ export default function AuthLayout({ children, image }: Props) {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (cookies.user_access) navigate("/app")
+        if (cookies.user_access) {
+            console.log("Token: ", cookies.user_access)
+            navigate("/app")
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
