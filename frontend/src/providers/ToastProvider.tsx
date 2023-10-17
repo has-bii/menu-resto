@@ -29,6 +29,7 @@ export function ToastProvider({ children }: Props) {
 
             setTo(setTimeout(() => setToasts(toasts.slice(1, toasts.length)), 2000))
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [toasts])
 
     function pushToast(message: string, status: ToastStatus) {
@@ -47,4 +48,5 @@ export function ToastProvider({ children }: Props) {
     )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useToast = () => useContext(ToastContext)
